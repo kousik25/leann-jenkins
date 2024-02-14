@@ -4,11 +4,11 @@ pipeline {
             label 'AGENT-1'
         }
     }
-    environment {
+    environment { 
         GREETING = 'Hello Jenkins'
     }
-    options{
-        timeout(time:1, unit:'HOURS')
+    options {
+        timeout(time: 1, unit: 'HOURS')
         disableConcurrentBuilds()
     }
     parameters {
@@ -22,24 +22,24 @@ pipeline {
 
         password(name: 'PASSWORD', defaultValue: 'SECRET', description: 'Enter a password')
     }
-
+    // build
     stages {
         stage('Build') {
             steps {
-                echo 'Building'
+                echo 'Building..'
             }
         }
         stage('Test') {
             steps {
-                echo 'Testing'
+                echo 'Testing..'
             }
         }
         stage('Deploy') {
             steps {
                 sh """
-                  echo "I wrote shell script"
-                  echo "$GREETING"
-                  #sleep 10
+                    echo  "Here I wrote shell script"
+                    echo "$GREETING"
+                    #sleep 10
                 """
             }
         }
@@ -59,17 +59,16 @@ pipeline {
             }
         }
     }
-    }
-    //POST BUILD
-    post {
-        always {
-            echo 'I will always say Hello Again'
+    // post build
+    post { 
+        always { 
+            echo 'I will always say Hello again!'
         }
-         failure {
-            echo 'this runs when pipeline is failedused generally to send some alerts'
+        failure { 
+            echo 'this runs when pipeline is failed, used generally to send some alerts'
         }
-         success {
-            echo 'I will always say Hello when pipeline is susccess'
+        success{
+            echo 'I will say Hello when pipeline is success'
         }
     }
 }
