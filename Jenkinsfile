@@ -23,7 +23,7 @@ pipeline {
         }
     }
     //POST BUILD
-    POST {
+    post {
         always {
             echo 'I will always say Hello Again'
         }
